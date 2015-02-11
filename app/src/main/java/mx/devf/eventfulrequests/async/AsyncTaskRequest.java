@@ -47,7 +47,7 @@ public class AsyncTaskRequest extends AsyncTask<String, Void, ArrayList<Event>> 
             urlConnection.connect();
 
             InputStream inputStream = urlConnection.getInputStream();
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             if (inputStream == null) {
                 return null;
             }
@@ -55,7 +55,8 @@ public class AsyncTaskRequest extends AsyncTask<String, Void, ArrayList<Event>> 
 
             String line;
             while ((line = reader.readLine()) != null) {
-                buffer.append(line + "\n");
+                buffer.append(line)
+                        .append("\n");
             }
 
             if (buffer.length() == 0) {
@@ -92,6 +93,12 @@ public class AsyncTaskRequest extends AsyncTask<String, Void, ArrayList<Event>> 
     @Override
     protected void onPostExecute(ArrayList<Event> events) {
         super.onPostExecute(events);
+
+        if(events == null){
+            responseListener.onError();
+            return;
+        }
+
         responseListener.onResponse(events);
     }
 

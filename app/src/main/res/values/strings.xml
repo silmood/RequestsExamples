@@ -7,5 +7,6 @@
     <string name="asynctask_label">Asynctask</string>
     <string name="volley_label">Volley</string>
     <string name="retrofit_label">Retrofit</string>
+    <string name="place_hint">Where?</string>
 
 </resources>
